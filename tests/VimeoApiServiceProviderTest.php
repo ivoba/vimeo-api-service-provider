@@ -16,7 +16,7 @@ class VimeoApiServiceProviderTest extends \PHPUnit_Framework_TestCase
         $app = new Application();
 
         $app->register(new VimeoApiServiceProvider(), array('vimeo.options' => array(
-            'client_key' => 'key', 'client_secret' => 'secret', 'access_token' => 'my_token'
+            'client_key' => 'key', 'client_secret' => 'secret', 'access_token' => ''
         )));
         $app->boot();
 
