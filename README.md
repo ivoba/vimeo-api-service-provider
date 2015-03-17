@@ -19,6 +19,12 @@ $ composer require ivoba/vimeo-api-service-provider
 
 ## Usage
 
+Register the Provider:
+``` php
+$app->register(new Ivoba\Silex\VimeoApiServiceProvider(), 
+               array('vimeo.options' => array('client_key' => 'key', 'client_secret' => 'secret', 'access_token' => 'your_token')));
+```
+
 Default modus is [unauthenticated](https://github.com/vimeo/vimeo.php#unauthenticated).  
 It is recommended that you generated the access token once, store it to your config and use it forever.  
 If you dont provide a token, your token will be retrieved from Vimeo for every call, which will cost performance.  
@@ -29,16 +35,14 @@ To show your token, call this once in your app, in debug mode. It will throw an 
 $app['vimeo.api.show_token'];
 ```
 
-Register the Provider:
-``` php
-$app->register(new Ivoba\Silex\VimeoApiServiceProvider(), 
-               array('vimeo.options' => array('client_key' => 'key', 'client_secret' => 'secret', 'access_token' => 'your_token')));
-```
-
 Now you can use the Vimeo API with:
 
 ``` php
-$app['vimeo.api']->request('/me/videos', array('per_page' => 2), 'GET');
+$app['vimeo.api']->request('/videos', array('query' => 'silex',
+                     'format' => 'php',
+                     'full_response' => '1',
+                     'per_page' => 8,
+                     'sort' => 'date'), 'GET');
 ```
 
 ## Todo
